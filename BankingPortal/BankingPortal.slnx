@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/database/" />
+  <Folder Name="/documentation/" />
+  <Folder Name="/src/">
+    <Project Path="../src/BankingPortal.Application/BankingPortal.Application.csproj" />
+    <Project Path="../src/BankingPortal.Domain/BankingPortal.Domain.csproj" />
+    <Project Path="../src/BankingPortal.Infrastructure/BankingPortal.Infrastructure.csproj" />
+    <Project Path="../src/BankingPortal.Shared/BankingPortal.Shared.csproj" />
+    <Project Path="../src/BankingPortalAPI/BankingPortalAPI.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
