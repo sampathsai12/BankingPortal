@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+
 namespace BankingPortal.Domain.Entities
 {
     public class CustomerKyc
@@ -14,6 +12,9 @@ namespace BankingPortal.Domain.Entities
         public string? PassportNumber { get; set; }
         public string VerificationStatus { get; set; } = "Pending";
         public DateTime? VerifiedDate { get; set; }
+
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedDate { get; set; }
 
         public Customer Customer { get; set; } = null!;
     }

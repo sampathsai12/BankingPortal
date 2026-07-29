@@ -4,6 +4,7 @@ using BankingPortal.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingPortal.Infrastructure.Migrations
 {
     [DbContext(typeof(BankingPortalDbContext))]
-    partial class BankingPortalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260728170730_UpdateCustomerKycTimestamps")]
+    partial class UpdateCustomerKycTimestamps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

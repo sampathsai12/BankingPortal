@@ -45,7 +45,10 @@ namespace BankingPortal.Infrastructure.Services
 
         public async Task<string?> LoginAsync(LoginRequestDto request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+            var user = await _context.Users
+                .Include(u => u.UserRoles)
+                    .ThenInclude(ur => ur.Role)
+                .FirstOrDefaultAsync(u => u.Username == request.Username);
             if (user == null || user.IsLocked) return null;
 
             if (!VerifyPasswordHash(request.Password, Convert.FromBase64String(user.PasswordHash), Convert.FromBase64String(user.PasswordSalt)))
@@ -76,11 +79,19 @@ namespace BankingPortal.Infrastructure.Services
             var jwtSettings = _config.GetSection("JwtSettings");
             var key = Encoding.UTF8.GetBytes(jwtSettings["Secret"]!);
 
-            var claims = new[]
+            var claims = new List<Claim>
+{
+    new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+    new Claim(ClaimTypes.Name, user.Username)
+};
+
+            foreach (var role in user.UserRoles)
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Name, user.Username)
-            };
+                claims.Add(new Claim(
+                    ClaimTypes.Role,
+                    role.Role.RoleName
+                ));
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

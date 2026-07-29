@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Principal;
-using System.Text;
-
-namespace BankingPortal.Domain.Entities
+﻿namespace BankingPortal.Domain.Entities
 {
     public class Customer
     {
