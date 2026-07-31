@@ -144,5 +144,13 @@ namespace BankingPortal.Infrastructure.Services
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<Customer?> GetCustomerByUserIdAsync(long userId)
+        {
+            var user = await _context.Users
+                .Include(u => u.Customer)
+                .FirstOrDefaultAsync(u => u.UserId == userId);
+
+            return user?.Customer;
+        }
     }
 }
